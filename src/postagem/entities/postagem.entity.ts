@@ -1,6 +1,8 @@
 import { IsNotEmpty } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
+// DDL (Data Definition Language) - Linguagem de Definição de Dados, ou seja, a classe que define a estrutura da tabela do banco de dados, onde cada propriedade da classe representa uma coluna da tabela.
+
 // Objeto de domínio, ou seja, a classe que representa a tabela do banco de dados, onde cada instância dessa classe representa uma linha da tabela.
 @Entity({name: 'tb_postagem'})
 export class Postagem {
