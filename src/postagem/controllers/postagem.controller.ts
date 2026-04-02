@@ -19,7 +19,7 @@ export class PostagemController {
         return this.postagemService.findById(id); // Chama o método findById do serviço de postagem para buscar uma postagem específica no banco de dados com base no ID fornecido e retornar a postagem encontrada.
     }
 
-        @Get("/titulo/:titulo")
+    @Get("/titulo/:titulo")
     @HttpCode(HttpStatus.OK)
     findByTitulo(@Param("titulo") titulo: string): Promise<Postagem[]> { // Param = Extrai o parâmetro "titulo" da rota, ou seja, quando uma requisição GET for feita para a rota 'postagens/titulo/:titulo', esse método será chamado e o valor do parâmetro "titulo" será passado para o método findByTitulo como argumento.
         return this.postagemService.findByTitulo(titulo);
