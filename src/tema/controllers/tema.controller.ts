@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { TemaService } from "../services/tema.service";
 import { Tema } from "../entities/tema.entity";
+import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 
+@UseGuards(JwtAuthGuard) // Todos os métodos foram protegido pelo token
 @Controller('temas') // Define a rota base do controller. Indica que a classe é um RestController, ou seja, será responsável receber e processar as requisições HTTP relacionas ao recurso Tema
 export class TemaController {
     constructor(private readonly temaService: TemaService) {}// Injeção de dependência do serviço de tema, com isso podemos acessar todos os métodos da TemaService dentro do TemaController, ou seja, podemos usar os métodos do serviço para implementar a lógica da aplicação no controller.

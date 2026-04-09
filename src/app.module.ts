@@ -6,6 +6,9 @@ import { Postagem } from './postagem/entities/postagem.entity';
 import { PostagemModule } from './postagem/postagem.module';
 import { Tema } from './tema/entities/tema.entity';
 import { TemaModule } from './tema/tema.module';
+import { AuthModule } from './auth/auth.module';
+import { UsuarioModule } from './usuario/usuario.module';
+import { Usuario } from './usuario/entities/usuario.entity';
 
 
 @Module({
@@ -17,11 +20,13 @@ import { TemaModule } from './tema/tema.module';
       username: 'root',
       password: 'Kauavini2007*',
       database: 'db_blogpessoal',
-      entities: [Postagem, Tema],
+      entities: [Postagem, Tema, Usuario], // chama as entidades que criamos para que o TypeORM possa criar as tabelas correspondentes no banco de dados.
       synchronize: true
     }),
     PostagemModule, 
-    TemaModule
+    TemaModule,
+    AuthModule,
+    UsuarioModule // importa o módulo de usuário para que ele possa ser utilizado em outros módulos da aplicação, como o módulo de autenticação, onde será necessário acessar os dados dos usuários para realizar a autenticação e autorização.
   ],
   controllers: [AppController],
   providers: [AppService],

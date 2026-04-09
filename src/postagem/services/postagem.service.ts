@@ -20,7 +20,8 @@ export class PostagemService {
         return await this.postagemRepository.find({
             relations: {
                 tema: true // relations = Permite que o TypeORM busque as postagens junto com os temas relacionados a cada postagem, ou seja, quando buscarmos as postagens, também teremos acesso aos temas relacionados a cada postagem.
-            }
+            },
+
         }); // await = Esperando a resposta do banco de dados para retornar a lista de postagens. 
 
     }
@@ -59,7 +60,6 @@ export class PostagemService {
 } catch (error) {
             throw new BadRequestException('Dados inválidos para criar postagem')
         }
-
     }
     async update(postagem: Postagem): Promise<Postagem> {
         let buscaPostagem: Postagem = await this.findById(postagem.id); // Busca a postagem no banco de dados com base no ID fornecido, se a postagem não for encontrada, lança uma exceção HTTP 404 Not Found.
@@ -74,11 +74,9 @@ export class PostagemService {
     }
 
 }
-
     async delete(id: number): Promise<DeleteResult> {
         await this.findById(id);
         return await this.postagemRepository.delete(id);
 }
-
 }
 

@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { PostagemService } from "../services/postagem.service";
 import { Postagem } from "../entities/postagem.entity";
+import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 
 // -- Porta de entrada para requisições HTTP relacionadas ao recurso Postagem, ou seja, é responsável por receber e processar as requisições HTTP relacionadas às postagens, como buscar todas as postagens, criar uma nova postagem, atualizar uma postagem existente e deletar uma postagem.
 
+@UseGuards(JwtAuthGuard) // Todos os métodos foram protegido pelo token
 @Controller('postagens') // Define a rota base do controller. Indica que a classe é um RestController, ou seja, será responsável receber e processar as requisições HTTP relacionas ao recurso Postagem
 export class PostagemController {
     constructor(private readonly postagemService: PostagemService) {}// Injeção de dependência do serviço de postagem, com isso podemos acessar todos os métodos da PostagemService dentro do PostagemController, ou seja, podemos usar os métodos do serviço para implementar a lógica da aplicação no controller.
