@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -11,17 +12,22 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { Usuario } from './usuario/entities/usuario.entity';
 
 
+
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
     TypeOrmModule.forRoot({ 
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'Kauavini2007*',
-      database: 'db_blogpessoal',
+    type: process.env.DB_TYPE as 'mysql',
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
       entities: [Postagem, Tema, Usuario], // chama as entidades que criamos para que o TypeORM possa criar as tabelas correspondentes no banco de dados.
-      synchronize: true
+      synchronize: process.env.DB_SYNCHRONIZE === 'true'
     }),
     PostagemModule, 
     TemaModule,
@@ -29,7 +35,7 @@ import { Usuario } from './usuario/entities/usuario.entity';
     UsuarioModule // importa o módulo de usuário para que ele possa ser utilizado em outros módulos da aplicação, como o módulo de autenticação, onde será necessário acessar os dados dos usuários para realizar a autenticação e autorização.
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: []
 })
 export class AppModule {}
 
