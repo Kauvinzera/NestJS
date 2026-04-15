@@ -10,25 +10,17 @@ import { TemaModule } from './tema/tema.module';
 import { AuthModule } from './auth/auth.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { Usuario } from './usuario/entities/usuario.entity';
+import { ProdService } from './data/services/prod.service';
 
 
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-
-    TypeOrmModule.forRoot({ 
-    type: process.env.DB_TYPE as 'mysql',
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-      entities: [Postagem, Tema, Usuario], // chama as entidades que criamos para que o TypeORM possa criar as tabelas correspondentes no banco de dados.
-      synchronize: process.env.DB_SYNCHRONIZE === 'true'
-    }),
+  ConfigModule.forRoot(),
+  TypeOrmModule.forRootAsync({
+	useClass: ProdService,
+    imports: [ConfigModule],
+}),
     PostagemModule, 
     TemaModule,
     AuthModule,
