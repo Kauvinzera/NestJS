@@ -2,32 +2,27 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { Postagem } from './postagem/entities/postagem.entity';
-import { PostagemModule } from './postagem/postagem.module';
-import { Tema } from './tema/entities/tema.entity';
-import { TemaModule } from './tema/tema.module';
 import { AuthModule } from './auth/auth.module';
+import { PostagemModule } from './postagem/postagem.module';
+import { TemaModule } from './tema/tema.module';
 import { UsuarioModule } from './usuario/usuario.module';
-import { Usuario } from './usuario/entities/usuario.entity';
 import { ProdService } from './data/services/prod.service';
-
-
+import { DevService } from './data/services/dev.service';
 
 @Module({
   imports: [
-  ConfigModule.forRoot(),
-  TypeOrmModule.forRootAsync({
-	useClass: ProdService,
-    imports: [ConfigModule],
-}),
-    PostagemModule, 
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      useClass: ProdService,
+      imports: [ConfigModule],
+    }),
+    PostagemModule,
     TemaModule,
     AuthModule,
-    UsuarioModule // importa o módulo de usuário para que ele possa ser utilizado em outros módulos da aplicação, como o módulo de autenticação, onde será necessário acessar os dados dos usuários para realizar a autenticação e autorização.
+    UsuarioModule
   ],
   controllers: [AppController],
-  providers: []
+  providers: [],
 })
 export class AppModule {}
 
