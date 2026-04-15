@@ -9,6 +9,7 @@ import { AuthService } from "../services/auth.service";
 // A LocalStrategy é responsável por verificar se as credenciais fornecidas pelo usuário correspondem a um usuário válido no sistema,
 // Utilizando o AuthService para realizar essa validação. Se as credenciais forem válidas, a estratégia retorna o usuário autenticado; caso contrário, lança uma exceção UnauthorizedException indicando que as credenciais são inválidas.
 
+//Autenticação através de email e senha
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {

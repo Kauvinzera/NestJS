@@ -12,8 +12,6 @@ export class AuthService {
         private jwtService: JwtService
     ) { // Injeção de dependências: O construtor da classe AuthService recebe três parâmetros: usuarioService, bcrypt e jwtService. Esses parâmetros são injetados automaticamente pelo NestJS, permitindo que a AuthService utilize os métodos e funcionalidades desses serviços para realizar suas operações de autenticação e geração de tokens JWT.
     }
-
-
     async validateUser(usuario: string, senha: string): Promise<any> { //Usa o metodo de compararSenha criada no bcrypt
         
         const buscaUsuario = await this.usuarioService.findByUsuario(usuario);
@@ -32,7 +30,6 @@ export class AuthService {
         }
         return null;
     }
-
     async login(usuarioLogin: UsuarioLogin) {
     const payload = {sub: usuarioLogin.usuario};
 
@@ -46,7 +43,5 @@ export class AuthService {
         foto: buscaUsuario?.foto,
         token: `Bearer ${this.jwtService.sign(payload)}`,
     }
-
 }
-
 }

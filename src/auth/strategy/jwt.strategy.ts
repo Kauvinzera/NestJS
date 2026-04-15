@@ -8,6 +8,8 @@ import { jwtConstants } from "../constants/constant";
 // Somente depois de concluir esses dois processos, o Passport executa o método validate(payload: any), que recebe o JSON decodificado contendo o payload.
 // Ao retornar o payload no método validate(payload: any), estamos confirmando que o Token JWT foi validado. Caso necessário, você pode implementar outras lógicas adicionais.
 
+// Responsavel por implementar a validação do token nos pontos protegidos pela aplicação
+
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
 constructor() {

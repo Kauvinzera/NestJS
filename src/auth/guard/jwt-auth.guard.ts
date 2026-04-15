@@ -4,5 +4,7 @@ import { AuthGuard } from '@nestjs/passport';
 // será utilziada m todas as Classes Controladoras que possuam endpoints protegidos
 // para redirecionar as Requisições para a Estratégia Jwt do Passport, ou seja, efetuar a validação do Token JWT enviado no cabeçalho da Requisição, antes de autorizar o acesso ao endpoint, mesmo que o usuário esteja autenticado.
 
+// Responsável por indicar os ENDPOINTS Protegidos da aplicação, ou seja, que o acesso será liberado após a validação do Token JWT
+
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {}
