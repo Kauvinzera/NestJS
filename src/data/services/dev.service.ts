@@ -14,7 +14,7 @@ export class DevService implements TypeOrmOptionsFactory {
 
     createTypeOrmOptions(): TypeOrmModuleOptions {
         return {
-    type: this.configService.get<string>('DB_TYPE') as any,
+      type: this.configService.get<string>('DB_TYPE') as any,
       host: this.configService.get<string>('DB_HOST'),
       port: this.configService.get<number>('DB_PORT'),
       username: this.configService.get<string>('DB_USERNAME'),

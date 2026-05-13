@@ -19,7 +19,8 @@ export class PostagemService {
     async findAll(): Promise<Postagem[]> { //Promisse = Prometendo que o retorno é uma lista de postagens
         return await this.postagemRepository.find({
             relations: {
-                tema: true // relations = Permite que o TypeORM busque as postagens junto com os temas relacionados a cada postagem, ou seja, quando buscarmos as postagens, também teremos acesso aos temas relacionados a cada postagem.
+                tema: true, // relations = Permite que o TypeORM busque as postagens junto com os temas relacionados a cada postagem, ou seja, quando buscarmos as postagens, também teremos acesso aos temas relacionados a cada postagem.
+                usuario: true
             },
 
         }); // await = Esperando a resposta do banco de dados para retornar a lista de postagens. 
