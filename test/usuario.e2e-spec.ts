@@ -3,6 +3,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import request from 'supertest';
+import { TestModule } from './test.module';
  
 describe('Testes dos Módulos Usuário e Auth (e2e)', () => {  // descrição do teste e2e, pacote de teste
   let token: string;
@@ -11,15 +12,7 @@ describe('Testes dos Módulos Usuário e Auth (e2e)', () => {  // descrição do
  
   beforeAll(async () => {  // configurações iniciais do teste que serão executadas antes de todos os testes uma vez so no inicio.
     const moduleFixture: TestingModule = await Test.createTestingModule({ // cria o modulo de teste nest e configura as dependências do modulo
-      imports: [
-        TypeOrmModule.forRoot({ // configuração do typeorm com o banco em memoria
-          type: "sqlite",  // tipo de banco
-          database: ":memory:", // banco em memoria, sera apagado ao final do teste
-          entities: [__dirname + "./../src/**/entities/*.entity.ts"], // caminho dos arquivos de entidades
-          synchronize: true, // sincroniza as entidades com o banco
-          dropSchema: true // apaga o banco ao final do teste
-        }),
-        AppModule], // importa o modulo principal para que as dependências sejam resolvidas
+      imports: [TestModule], // importa o modulo principal para que as dependências sejam resolvidas
     }).compile(); // compila o modulo
  
     app = moduleFixture.createNestApplication();  // cria a aplicação nest
